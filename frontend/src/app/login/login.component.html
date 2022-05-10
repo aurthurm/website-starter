@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>Signin</title> 
+  </head>
+  <body class="text-center">
+    <main class="form-signin" >
+      <h1 class="form-heading">Management Admin</h1>
+      <form [formGroup]="authForm">
+        <div class="form-floating">
+          <label for="username">Username</label>
+          <input 
+          type="username"
+          class="form-control" 
+          id="username" 
+          formControlName="username"
+          placeholder="Username ...">
+        </div>
+        <div class="form-floating">
+          <label for="password">Password</label>
+          <input 
+          type="password" 
+          class="form-control" 
+          id="password" 
+          formControlName="password"
+          placeholder="Password ...">
+        </div>
+        <button 
+        type="submit" 
+        [disabled]="!authForm.valid"
+        (click)="authenticate()">Sign in</button>
+      </form>
+      <p class="copyright">&copy; NMRL 2021</p>
+    </main>
+  </body>
+</html>

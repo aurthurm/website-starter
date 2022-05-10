@@ -1,0 +1,7 @@
+{
+    "editor.formatOnSave": true,
+    "java.saveActions.organizeImports": true,
+    "code-runner.saveFileBeforeRun": true,
+    "code-runner.saveAllFilesBeforeRun": true,
+    "importSorter.generalConfiguration.sortOnBeforeSave": false,
+}

@@ -1,0 +1,23 @@
+<div class="container mx-auto">
+    <div class="grid grid-cols-2 gap-4 py-16" *ngIf="(articleState$ | async) as newsUpdate" >
+        <article 
+        *ngFor="let article of newsUpdate.articles"
+        class="col-span-1 grid grid-cols-3 gap-4 mb-4">
+            <div class="col-span-1" *ngIf="article?.featuredImage">
+                <img src="http://localhost:3000/{{article?.featuredImage}}" alt="test image" class="object-contain">
+            </div>
+            <div class="col-span-2" *ngIf="article?.featuredImage">
+                <a routerLink="./{{article.slug}}">
+                    <h4 class="mb-4 text-gray-500 font-semibold uppercase line-clamp-2">{{ article?.title }}</h4>
+                </a>
+                <p class="text-normal font-normal text-gray-700 line-clamp-3" [innerHTML]="article?.excerpt ?? article?.content"></p>
+            </div>
+            <div class="col-span-3" *ngIf="!article?.featuredImage">
+                <a routerLink="./{{article.slug}}">
+                    <h4 class="mb-4 text-gray-500 font-semibold uppercase line-clamp-2">{{ article?.title }}</h4>
+                </a>
+                <p class="text-normal font-normal text-gray-700 line-clamp-3" [innerHTML]="article?.excerpt ?? article?.content"></p>
+            </div>
+        </article>
+    </div>
+</div>

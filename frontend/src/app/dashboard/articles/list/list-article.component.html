@@ -1,0 +1,209 @@
+<div >
+	<div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+		<div class="p-4 flex justify-between items-center">
+            <div>
+                <button 
+                routerLink="../new"
+                class="focus:ring-2 focus:ring-offset-2 focus:ring-blue-600 mt-4 sm:mt-0 inline-flex items-start justify-start px-6 py-3 bg-blue-700 hover:bg-blue-600 focus:outline-none shadow-md rounded">
+                    <p class="text-sm font-medium leading-none text-white">Add Article</p>
+                </button>
+            </div>
+			<div>
+                <label for="table-search" class="sr-only">Search</label>
+                <div class="relative mt-1">
+                    <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                        <svg class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="currentColor" viewBox="0 0 20 20"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd"
+                                d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
+                                clip-rule="evenodd"></path>
+                        </svg>
+                    </div>
+                    <input 
+                    type="text" 
+                    id="table-search" 
+                    (keyup)="filterArticles()"
+                    [(ngModel)]="filters.title"
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-80 pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Search for articles">
+                </div>
+            </div>
+		</div>
+        <div class="ml-4 flex justify-start items-center">
+            <div class="flex justify-center">
+                <div class="mb-3 w-64">
+                  <select class="form-select appearance-none
+                    block
+                    w-full
+                    px-3
+                    py-1.5
+                    text-base
+                    font-normal
+                    text-gray-700
+                    bg-white bg-clip-padding bg-no-repeat
+                    border border-solid border-gray-300
+                    rounded
+                    transition
+                    ease-in-out
+                    m-0
+                    focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" 
+                    [(ngModel)]="filters.category"
+                    (change)="filterArticles()"
+                    *ngIf="categories$ | async; let categories"
+                    aria-label="Default select example">
+                      <option value="" selected>All Categories</option>
+                      <option 
+                      *ngFor="let category of categories"
+                      [value]="category.title">{{category.title}}</option>
+                  </select>
+                </div>
+            </div>
+            <div class="flex justify-center ml-4">
+                <div class="mb-3 w-64">
+                  <select class="form-select appearance-none
+                    block
+                    w-full
+                    px-3
+                    py-1.5
+                    text-base
+                    font-normal
+                    text-gray-700
+                    bg-white bg-clip-padding bg-no-repeat
+                    border border-solid border-gray-300
+                    rounded
+                    transition
+                    ease-in-out
+                    m-0
+                    focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" 
+                    [(ngModel)]="filters.status"
+                    (change)="filterArticles()"
+                    aria-label="Default select example">
+                      <option value="" selected>All states</option>
+                      <option value="draft">Draft</option>
+                      <option value="review">Review</option>
+                      <option value="published">Published</option>
+                  </select>
+                </div>
+            </div>
+        </div>
+        <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+            <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                <tr>
+                    <!-- <th scope="col" class="p-4">
+                        <div class="flex items-center">
+                            <input id="checkbox-all-search" type="checkbox" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                            <label for="checkbox-all-search" class="sr-only">checkbox</label>
+                        </div>
+                    </th> -->
+                    <th scope="col" class="px-6 py-3">
+                        Title
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        Author
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        Categories
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        Tags
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        Status
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        Date Created
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        Date Published
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        <span class="sr-only">Edit</span>
+                    </th>
+                </tr>
+            </thead>
+            <tbody *ngIf="(dataState$ | async) as dataState">
+                <tr *ngFor="let article of dataState?.data?.results"
+                    class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                    <!-- <td class="w-4 p-4">
+                        <div class="flex items-center">
+                            <input id="checkbox-table-search-1" type="checkbox" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                        </div>
+                    </td> -->
+                    <th scope="row" class="px-6 py-2 font-medium text-gray-900 dark:text-white whitespace-nowrap text-excerpt">
+                       {{ article?.title }}
+                    </th>
+                    <td class="px-6 py-2">
+                       {{ article?.author?.name }}
+                    </td>
+                    <td class="px-6 py-2">
+                       categories
+                    </td>
+                    <td class="px-6 py-2">
+                       tags
+                    </td>
+                    <td class="px-6 py-2">
+                       {{ article?.status }}
+                    </td>
+                    <td class="px-6 py-2">
+                       {{ article?.createdAt }}
+                    </td>
+                    <td class="px-6 py-2">
+                       wealallal
+                    </td>
+                    <td class="px-2 py-2 text-center">
+                        <span
+                        (click)="publishArticle(article)"
+                        class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Publish</span>
+                    </td>
+                    <td class="px-2 py-2 text-center">
+                        <span
+                        (click)="editArticle(article)"
+                        class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</span>
+                    </td>
+                    <td class="px-2 py-2 text-center">
+                        <span 
+                        (click)="deleteArticle(article)"
+                        class="font-medium text-red-600 dark:text-red-500 hover:underline">Delete</span>
+                    </td>
+                </tr>
+            
+            </tbody>
+        </table>
+
+        <div *ngIf="(dataState$ | async) as dataState" class="flex items-center justify-center py-10 lg:px-0 sm:px-6 px-4">
+            <div class="lg:w-3/5 w-full flex items-center justify-between border-t border-gray-200">
+                <div 
+                class="flex items-center pt-3"
+                (click)="goToPage(dataState?.data?.page! - 1)"
+                [ngClass]="dataState?.data?.page === 1 ? 'text-gray-300 cursor-not-allowed' : 'text-gray-600 hover:text-indigo-700 cursor-pointer'">
+                    <svg width="14" height="8" viewBox="0 0 14 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M1.1665 4H12.8332" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" />
+                        <path d="M1.1665 4L4.49984 7.33333" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" />
+                        <path d="M1.1665 4.00002L4.49984 0.666687" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                    <p class="text-sm ml-3 font-medium leading-none">Previous</p>
+                </div>
+                <div class="sm:flex hidden">
+                    <p 
+                    *ngFor="let page of pagination(dataState?.data?.page ?? 0, dataState?.data?.pages ?? 0)"
+                    class="text-sm font-medium leading-none cursor-pointer border-t pt-3 mr-4 px-2"
+                    (click)="goToPage(page)"
+                    [ngClass]="page === dataState?.data?.page ? 'text-indigo-700 border-indigo-400 cursor-not-allowed' : 'text-gray-600 hover:text-indigo-700 border-transparent hover:border-indigo-400'"
+                    > {{ page }}</p>
+                </div>
+                <div 
+                class="flex items-center pt-3 cursor-pointer"
+                (click)="goToPage(dataState?.data?.page! + 1)"
+                [ngClass]="dataState?.data?.page === dataState?.data?.pages ? 'text-gray-300 cursor-not-allowed' : 'text-gray-600 hover:text-indigo-700 cursor-pointer'"
+                >
+                    <p class="text-sm font-medium leading-none mr-3">Next</p>
+                    <svg width="14" height="8" viewBox="0 0 14 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M1.1665 4H12.8332" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" />
+                        <path d="M9.5 7.33333L12.8333 4" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" />
+                        <path d="M9.5 0.666687L12.8333 4.00002" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                </div>
+            </div>
+        </div>
+    
+    </div>
+</div>

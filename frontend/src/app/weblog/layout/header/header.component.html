@@ -1,0 +1,185 @@
+<section class="bg-blue-200 p-3 text-center">
+    COVID19 Alert!! Keep safe and practice great hygiene
+</section>
+<header id="site-header" class="bg-white">
+  <div class="">
+    <section class="container mx-auto flex justify-between items-center py-2">
+      <div class="flex justify-start items-center">
+        <a class="" href="">
+          <img src="/assets/images/logo.png" alt="" class="col-span-1 object-contain h-24" />
+        </a>
+        <div class="ml-4 font-semibold"> 
+          National Microbiology <br />
+          Reference Laboratory
+          <hr class="my-1">
+          <span class="font-thin text-xs text-gray-500">Leaders in pioneering heathcare.</span>
+        </div>
+      </div>
+      <div>
+        <div class="mb-4">
+          <a class="p-1 text-gray-300 w-100 hover:text-gray-600" routerLink="/admin">Admin Login</a>
+        </div>
+        <input class="w-64 h-8 rounded pl-2 flex-shrink-1 block border border-gray-200 text-md appearance-none focus:outline-none focus:border-gray-300"
+        type="input" title="search" id="search" placeholder="Search NMRL ..." />
+      </div>
+    </section>
+
+    <div class="bg-green-500">
+      <nav class="container mx-auto flex justify-between text-gray-100 font-semibold text-sm">
+        <div class="flex justify-around">
+          <a class="py-2 px-3 hover:bg-green-700" routerLink="/">IN A GLANCE</a>
+        </div>
+        <div class="flex justify-around">
+          <div class="group inline-block relative z-50">
+            <a class="px-4 py-2 hover:bg-green-700 font-semibold inline-flex items-center cursor-pointer">
+              <span class="mr-1">KNOW US</span>
+            </a>
+            <ul *ngIf="abouts$ | async; let abouts"
+            class="absolute hidden bg-gray-800 text-gray-200 group-hover:block drop-shadow-md">
+              <li *ngFor="let about of abouts"
+              class="">
+                <a 
+                routerLink="/about/{{ about?.title }}" 
+                class="py-2 px-4 block whitespace-nowrap hover:text-green-500">{{about?.title }}</a>
+              </li>
+            </ul>
+          </div>
+          <div class="group inline-block relative z-50">
+            <a class="px-4 py-2 hover:bg-green-700 font-semibold inline-flex items-center cursor-pointer">
+              <span class="mr-1">WHAT WE DO</span>
+            </a>
+            <ul *ngIf="services$ | async; let services"
+            class="absolute hidden bg-yellow-300 text-gray-700 group-hover:block drop-shadow-md">
+              <li *ngFor="let service of services"
+              class="">
+                <a 
+                routerLink="/services/{{ service?.title }}" 
+                class="py-2 px-4 block whitespace-nowrap hover:text-green-500 ">{{service?.title }}</a>
+              </li>
+            </ul>
+          </div>
+          <div class="group inline-block relative z-50">
+            <a 
+            class="px-4 py-2 hover:bg-green-700 font-semibold inline-flex items-center cursor-pointer">
+              <span class="mr-1">CENTERS OF EXCELENCE</span>
+            </a>
+            <ul *ngIf="departments$ | async; let departments"
+            class="absolute hidden bg-gray-100 text-gray-500 group-hover:block drop-shadow-md">
+              <li *ngFor="let department of departments"
+              class="">
+                <a 
+                routerLink="/departments/{{ department?.title }}" 
+                class="py-2 px-4 block whitespace-nowrap hover:text-green-500 hover:bg-gray-200">{{department?.title }}</a>
+              </li>
+            </ul>
+          </div>
+          <div class="group inline-block relative z-50">
+            <a routerLink="/articles"
+            class="px-4 py-2 hover:bg-green-700 font-semibold inline-flex items-center cursor-pointer">
+              <span class="mr-1">ARTICLES</span>
+            </a>
+            <ul *ngIf="categories$ | async; let categories"
+            class="absolute hidden bg-gray-100 text-gray-500 group-hover:block drop-shadow-md">
+              <li *ngFor="let category of categories"
+              class="">
+                <a 
+                routerLink="/articles" 
+                [queryParams]="{ category: category?.title }"
+                class="py-2 px-4 block whitespace-nowrap hover:text-green-500 hover:bg-gray-200">{{category?.title }}</a>
+              </li>
+            </ul>
+          </div>
+          <a class="py-2 px-4 hover:bg-green-700" routerLink="/contact">STAY IN TOUCH</a>
+        </div>
+      </nav>
+    </div>
+  </div>
+</header>
+
+
+<!-- <svg
+class="fill-current h-4 w-4"
+xmlns="http://www.w3.org/2000/svg"
+viewBox="0 0 20 20"
+><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" /></svg> -->
+
+
+<!--
+
+// Nested Drop Down Menu Implementation
+
+<style>
+  /* since nested groupes are not supported we have to use 
+     regular css for the nested dropdowns 
+  */
+  li>ul                 { transform: translatex(100%) scale(0) }
+  li:hover>ul           { transform: translatex(101%) scale(1) }
+  li > button svg       { transform: rotate(-90deg) }
+  li:hover > button svg { transform: rotate(-270deg) }
+
+  /* Below styles fake what can be achieved with the tailwind config
+     you need to add the group-hover variant to scale and define your custom
+     min width style.
+  	 See https://codesandbox.io/s/tailwindcss-multilevel-dropdown-y91j7?file=/index.html
+  	 for implementation with config file
+  */
+  .group:hover .group-hover\:scale-100 { transform: scale(1) }
+  .group:hover .group-hover\:-rotate-180 { transform: rotate(180deg) }
+  .scale-0 { transform: scale(0) }
+  .min-w-32 { min-width: 8rem }
+</style>
+
+<div class="group inline-block">
+  <button class="outline-none focus:outline-none border px-3 py-1 bg-white rounded-sm flex items-center min-w-32">
+    <span class="pr-1 font-semibold flex-1">Dropdown</span>
+    <span>
+      <svg class="fill-current h-4 w-4 transform group-hover:-rotate-180
+        transition duration-150 ease-in-out" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+        <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"></path>
+      </svg>
+    </span>
+  </button>
+  <ul class="bg-white border rounded-sm transform scale-0 group-hover:scale-100 absolute 
+  transition duration-150 ease-in-out origin-top min-w-32">
+    <li class="rounded-sm px-3 py-1 hover:bg-gray-100">Programming</li>
+    <li class="rounded-sm px-3 py-1 hover:bg-gray-100">DevOps</li>
+    <li class="rounded-sm relative px-3 py-1 hover:bg-gray-100">
+      <button class="w-full text-left flex items-center outline-none focus:outline-none">
+        <span class="pr-1 flex-1">Langauges</span>
+        <span class="mr-auto">
+          <svg class="fill-current h-4 w-4
+            transition duration-150 ease-in-out" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+            <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"></path>
+          </svg>
+        </span>
+      </button>
+      <ul class="bg-white border rounded-sm absolute top-0 right-0 
+        transition duration-150 ease-in-out origin-top-left
+        min-w-32
+        ">
+        <li class="px-3 py-1 hover:bg-gray-100">Javascript</li>
+        <li class="rounded-sm relative px-3 py-1 hover:bg-gray-100">
+          <button class="w-full text-left flex items-center outline-none focus:outline-none">
+            <span class="pr-1 flex-1">Python</span>
+            <span class="mr-auto">
+              <svg class="fill-current h-4 w-4
+                transition duration-150 ease-in-out" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"></path>
+              </svg>
+            </span>
+          </button>
+          <ul class="bg-white border rounded-sm absolute top-0 right-0 
+            transition duration-150 ease-in-out origin-top-left
+            min-w-32
+            ">
+            <li class="px-3 py-1 hover:bg-gray-100">2.7</li>
+            <li class="px-3 py-1 hover:bg-gray-100">3+</li>
+          </ul>
+        </li>
+        <li class="px-3 py-1 hover:bg-gray-100">Go</li>
+        <li class="px-3 py-1 hover:bg-gray-100">Rust</li>
+      </ul>
+    </li>
+    <li class="rounded-sm px-3 py-1 hover:bg-gray-100">Testing</li>
+  </ul>
+</div> -->

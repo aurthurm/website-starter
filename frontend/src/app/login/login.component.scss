@@ -1,0 +1,71 @@
+html,
+body {
+  height: 100%;
+}
+
+body {
+  display: flex;
+  align-items: center;
+  align-content: center;
+  vertical-align: middle;
+  padding-top: 40px;
+  padding-bottom: 40px;
+  background-color: #0077b6;
+  height: 100vh;
+
+  .form-signin {
+    max-width: 330px;
+    padding: 15px;
+    margin: auto;
+
+    .form-heading {
+      font-size: 24px;
+      margin-bottom: 40px;
+    }
+    
+    form {
+      text-align: left;
+      margin-top: 100px;
+      margin-bottom: 100px;
+      
+      .form-floating {
+        margin-bottom: 20px;
+        display: flex; 
+        align-items: center;
+      
+        label {
+          min-width: 100px;
+          font-weight: 600;
+          font-size: 16px;
+        }
+      
+        input {
+          padding: 5px 10px;
+        }
+      }
+  
+    }
+  }
+
+  button {
+    margin-top: 20px;
+    padding: 6px 10px;
+    background-color: green;
+    border-radius: 2px;
+
+  }
+
+  button:disabled,
+  button[disabled]{
+    border: 1px solid #999999;
+    background-color: #cccccc;
+    color: #666666;
+  }
+
+  .copyright {
+    text-align: center;
+  }
+}
+
+
+

@@ -1,0 +1,162 @@
+<div>
+    <form [formGroup]="articleForm">
+      <div class="grid grid-cols-4 gap-4">
+        <section class="col-span-3">
+      
+            <div class="grid grid-cols-12 gap-4 mb-4">
+              <div  class="col-span-10">
+                <div class="mt-1 rounded-md shadow-sm">
+                  <input 
+                  type="text" 
+                  name="title" 
+                  id="article-title" 
+                  formControlName="title"
+                  class="w-full p-3 font-semibold text-2xl focus:ring-indigo-100 focus:border-indigo-100 block border-gray-300 rounded-md" 
+                  placeholder="Post title ...">
+                </div>
+              </div>
+              <div class="col-span-2">
+                <button 
+                type="submit"
+                [disabled]="savingAction || !articleForm.valid"
+                class="focus:ring-2 focus:ring-offset-2 focus:ring-blue-600 mt-4 inline-flex items-start justify-start px-6 py-3 bg-blue-700 hover:bg-blue-600 focus:outline-none shadow-md rounded disabled:bg-gray-500">
+                  <p *ngIf="!savingAction" class="text-sm font-medium leading-none text-white">Save Changes</p>
+                  <div *ngIf="savingAction" class=" flex justify-center items-center">
+                    <div class="animate-spin rounded-full h-4 w-4 border-b-2 border-white-900"></div>
+                    <p class="ml-2 text-sm font-medium leading-none text-white">Saving ...</p>
+                  </div>
+                </button>
+              </div>
+            </div>
+      
+            <editor 
+            [init]="editorConfig" 
+            formControlName="content"
+            (onSaveContent)="editorSave()"
+            ></editor>
+            <button name="submitbtn"></button>
+      
+        </section>
+      
+        <section class="col-span-1">
+      
+          <div class="w-full">
+              <div class="shadow-md">
+                <div 
+                *ngIf="postInfoIn?.config?.publishing === true"
+                class="tab w-full overflow-hidden border-t">
+                  <input class="absolute opacity-0 " id="article-publishing" type="checkbox" name="tabs">
+                  <label class="block p-2 leading-normal cursor-pointer" for="article-publishing">Publishing Options</label>
+                  <div class="tab-content overflow-hidden border-l-2 bg-gray-100 border-indigo-500 leading-normal">
+                      <div class="p-5">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tenetur, architecto, explicabo perferendis nostrum, maxime impedit atque odit sunt pariatur illo obcaecati soluta molestias iure facere dolorum adipisci eum? Saepe, itaque.</div>
+                  </div>
+                </div>
+                <div  
+                *ngIf="hasDivisions()"
+                class="tab w-full overflow-hidden border-t">
+                  <input class="absolute opacity-0" id="article-divisions" type="checkbox" name="tabs">
+                  <label class="block p-2 leading-normal cursor-pointer" for="article-divisions">Divisions</label>
+                  <div class="tab-content overflow-hidden border-l-2 bg-gray-100 border-indigo-500 leading-normal">
+                    <div class="p-5">
+                      <section *ngIf="postInfoIn?.config?.divisions?.includes('department')">
+                        <h4>Department</h4>
+                        <hr>
+                        <div class="my-2 w-64">
+                          <select class="form-select appearance-none
+                            block
+                            w-full
+                            px-3
+                            py-1.5
+                            text-base
+                            font-normal
+                            text-gray-700
+                            bg-white bg-clip-padding bg-no-repeat
+                            border border-solid border-gray-300
+                            rounded
+                            transition
+                            ease-in-out
+                            m-0
+                            focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" 
+                            aria-label="Default select example" formControlName="department">
+                              <option selected></option>
+                              <option *ngFor="let department of divisions.departments" [value]="department._id">{{ department.title }}</option>
+                          </select>
+                        </div>
+                      </section>
+                      
+                      <section *ngIf="postInfoIn?.config?.divisions?.includes('category')">
+                        <hr>
+                        <h4>Category</h4>
+                        <hr>
+                        <div class="my-2 w-64">
+                          <select class="form-select appearance-none
+                            block
+                            w-full
+                            px-3
+                            py-1.5
+                            text-base
+                            font-normal
+                            text-gray-700
+                            bg-white bg-clip-padding bg-no-repeat
+                            border border-solid border-gray-300
+                            rounded
+                            transition
+                            ease-in-out
+                            m-0
+                            focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" 
+                            aria-label="Default select example" formControlName="category">
+                              <option selected></option>
+                              <option *ngFor="let category of divisions.categories" [value]="category._id">{{ category.title }}</option>
+                          </select>
+                        </div>
+                      </section>
+                      <hr>
+
+                      <section *ngIf="postInfoIn?.config?.divisions?.includes('tags')">
+                        <h4>Tags</h4>
+                        <hr>
+                      </section>
+                    </div>
+                  </div>
+                </div>
+                <div 
+                *ngIf="postInfoIn?.config?.featurette === true"
+                class="tab w-full overflow-hidden border-t">
+                  <input class="absolute opacity-0" id="article-featurette" type="checkbox" name="tabs">
+                  <label class="block p-2 leading-normal cursor-pointer" for="article-featurette">Featured Image</label>
+                  <div class="tab-content overflow-hidden border-l-2 bg-gray-100 border-indigo-500 leading-normal">
+                    <div class="p-5">
+                      <div *ngIf="postInfoIn?.post?.featuredImage">
+                        <img src="http://localhost:3000/{{postInfoIn?.post?.featuredImage}}" alt="">
+                        <button 
+                        (click)="removeImage($event, postInfoIn?.post?._id!, postInfoIn?.post?.featuredImage!)"
+                        class="focus:ring-2 focus:ring-offset-2 focus:ring-blue-600 mt-4 inline-flex items-start justify-start p-2 bg-red-700 hover:bg-red-600 focus:outline-none shadow-md rounded">
+                          <p class="text-sm font-medium leading-none text-white">Remove Image</p>
+                        </button>
+                      </div>
+                      <div *ngIf="!postInfoIn?.post?.featuredImage">
+                        <h4>Upload ...</h4>
+                        <input type="file" name="file" (change)="handleFileUpload($event)">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div
+                  *ngIf="postInfoIn?.config?.excerpt === true"
+                 class="tab w-full overflow-hidden border-t">
+                  <input class="absolute opacity-0" id="article-excerpt" type="checkbox" name="tabs">
+                  <label class="block p-2 leading-normal cursor-pointer" for="article-excerpt">Excerpt</label>
+                  <div class="tab-content overflow-hidden border-l-2 bg-gray-100 border-indigo-500 leading-normal">
+                    <div class="p-5">
+                      <h4>This is the excerpt</h4>
+                    </div>
+                  </div>
+                </div>
+            </div>
+          </div>
+          
+        </section>
+      </div>
+    </form>
+  </div>
+  

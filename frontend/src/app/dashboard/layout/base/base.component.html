@@ -1,0 +1,29 @@
+<div id="admin-container">
+  <!-- nav -->
+  <app-navbar-main></app-navbar-main>
+  <!-- aside -->
+  <app-navbar-aside></app-navbar-aside>
+  <!-- bread crumb -->
+  <section class="is-title-bar">
+    <div class="flex flex-col md:flex-row items-center justify-between space-y-6 md:space-y-0">
+      <ul>
+        <li>Admin</li>
+        <li>Dashboard</li>
+      </ul>
+    </div>
+  </section>
+  <!-- content -->
+  <section class="main-section">
+      <router-outlet></router-outlet>
+  </section>
+  <!-- footer -->
+  <footer class="footer">
+    <div class="flex flex-col md:flex-row items-center justify-between space-y-3 md:space-y-0">
+      <div class="flex items-center justify-start space-x-3">
+        <div>
+          © 2021, NMRL
+        </div>
+      </div>
+    </div>
+  </footer>
+</div>
