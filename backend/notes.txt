@@ -1,0 +1,2 @@
+docker build -t nmrl_web .
+docker run nmrl_web

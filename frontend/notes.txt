@@ -1,0 +1,3 @@
+docker build -t wbsite .
+docker run -d -it -p 80:80/tcp --name wbsite
+docker run wbsite

@@ -1,0 +1,90 @@
+version: '3.8'
+
+services:
+  nestapp_dev:
+      container_name: nestapp_dev
+      image: nestapp-api-dev:1.0.0
+      build:
+          context: ./backend
+          target: development
+          dockerfile: Dockerfile
+      command: npm run start:debug
+      ports:
+          - 3000:3000
+          - 9229:9229
+      networks:
+          - website-net
+      depends_on:
+          - mongodb
+      volumes:
+          - ./backend:/usr/src/app
+          - /usr/src/app/node_modules
+      restart: unless-stopped
+
+  nestapp_prod:
+      container_name: nestapp_prod
+      image: nestapp-api-prod:1.0.0
+      build:
+          context: ./backend
+          target: production
+          dockerfile: Dockerfile
+      command: npm run start:prod
+      ports:
+          - 3000:3000
+          - 9229:9229
+      networks:
+          - website-net
+      depends_on:
+          - mongodb
+      volumes:
+          - ./backend:/usr/src/app
+          - /usr/src/app/node_modules
+      restart: unless-stopped
+
+  website_app:
+      container_name: website_app
+      image: website-app:1.0.0
+      build: 
+          context: ./frontend
+          dockerfile: Dockerfile
+      ports:
+          - "4200:4200"
+      networks:
+          - website-net
+
+  mongodb:
+    image: bitnami/mongodb:latest
+    ports:
+      - 27017:27017
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes
+    volumes:
+      - mongodb_data:/bitnami
+      - ./transfer:/home/transfer
+    networks:
+        - website-net
+
+  mongo-express:
+    image: mongo-express
+    restart: always
+    ports:
+      - 8081:8081
+    environment:
+      - ME_CONFIG_OPTIONS_EDITORTHEME=ambiance
+      - ME_CONFIG_MONGODB_SERVER=website
+      - ME_CONFIG_MONGODB_PORT=27017
+      - ME_CONFIG_MONGODB_AUTH_DATABASE=admin
+    links:
+      - mongodb
+    depends_on:
+      - mongodb
+    networks:
+        - website-net
+ 
+volumes:  
+  mongodb_data:
+
+
+networks:
+  website-net:
+    driver: bridge
