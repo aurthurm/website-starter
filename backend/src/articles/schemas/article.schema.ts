@@ -27,26 +27,15 @@ export class Article {
 
   @Prop({
     index: true,
-    type: [{ type: mongoose.Schema.Types.ObjectId, ref: Tag.name }],
+    type: [{ type: String }],
   })
-  @Type(() => Tag)
   tags: Tag;
 
-  @Prop({
-    index: true,
-    type: mongoose.Schema.Types.ObjectId,
-    ref: Category.name,
-  })
-  @Type(() => Category)
-  category: Category;
+  @Prop({ index: true })
+  category: string;
 
-  @Prop({
-    index: true,
-    type: mongoose.Schema.Types.ObjectId,
-    ref: Department.name,
-  })
-  @Type(() => Department)
-  department: Department;
+  @Prop({ index: true })
+  department: string;
 
   @Prop({ index: true })
   status: Status;

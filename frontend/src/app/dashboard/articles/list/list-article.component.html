@@ -109,12 +109,12 @@
                     <th scope="col" class="px-6 py-3">
                         Status
                     </th>
-                    <th scope="col" class="px-6 py-3">
+                    <!-- <th scope="col" class="px-6 py-3">
                         Date Created
                     </th>
                     <th scope="col" class="px-6 py-3">
                         Date Published
-                    </th>
+                    </th> -->
                     <th scope="col" class="px-6 py-3">
                         <span class="sr-only">Edit</span>
                     </th>
@@ -135,20 +135,20 @@
                        {{ article?.author?.name }}
                     </td>
                     <td class="px-6 py-2">
-                       categories
+                        {{ article?.category }}
                     </td>
                     <td class="px-6 py-2">
-                       tags
+                        {{ article?.tags }}
                     </td>
                     <td class="px-6 py-2">
                        {{ article?.status }}
                     </td>
-                    <td class="px-6 py-2">
+                    <!-- <td class="px-6 py-2">
                        {{ article?.createdAt }}
                     </td>
                     <td class="px-6 py-2">
-                       wealallal
-                    </td>
+                        {{ article?.publishedAt }}
+                    </td> -->
                     <td class="px-2 py-2 text-center">
                         <span
                         (click)="publishArticle(article)"

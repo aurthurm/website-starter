@@ -17,10 +17,14 @@ import { ServicesModule } from './services/services.module';
 import { ContactModule } from './contact/contact.module';
 import { DepartmentsModule } from './departments/departments.module';
 import { SliderModule } from './slider/slider.module';
+import { ConfigModule } from '@nestjs/config';
 
 @Module({
   imports: [
-    MongooseModule.forRoot('mongodb://192.168.122.185/nmrl_web'),
+    ConfigModule.forRoot(),
+    MongooseModule.forRoot(
+      `mongodb://${process.env.MONGODB_SERVER_HOST}/${process.env.MONGODB_DATABASE_NAME}`,
+    ), // 'mongodb://192.168.122.185/nmrl_web
     ServeStaticModule.forRoot({
       rootPath: join(__dirname, '..', 'uploads'),
       serveRoot: '/uploads',

@@ -5,6 +5,7 @@ import { CategoriesService } from 'src/app/dashboard/categories/service/categori
 import { DepartmentService } from 'src/app/dashboard/department/service/department.service';
 import { TagsService } from 'src/app/dashboard/tags/service/tags.service';
 import { IPost, IPostInfo, IPostSimple } from './post-editor.model';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-post-editor',
@@ -12,6 +13,7 @@ import { IPost, IPostInfo, IPostSimple } from './post-editor.model';
   styleUrls: ['./post-editor.component.scss']
 })
 export class PostEditorComponent implements OnInit, OnChanges {
+  BACKEND_API_URL = environment.BACKEND_API_URL;
   @Output() public postOut = new EventEmitter<any>();
   @Input() public postInfoIn!: IPostInfo;
 
@@ -124,8 +126,8 @@ export class PostEditorComponent implements OnInit, OnChanges {
       _id: post?._id,
       title: post?.title,
       content: post?.content,
-      category: post?.category?._id,
-      department: post?.department?._id,
+      category: post?.category,
+      department: post?.department,
       tags: post?.tags,
     });
   }

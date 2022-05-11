@@ -1,8 +1,6 @@
 import { IsString, IsNotEmpty } from 'class-validator';
 import { Type } from 'class-transformer';
 import { ApiProperty } from '@nestjs/swagger';
-import { Tag } from 'src/divisions/schemas/tag.schema';
-import { Category } from 'src/divisions/schemas/category.schema';
 import { Department } from 'src/departments/schemas/department.schema';
 import { Status } from '../articles.constants';
 import { User } from 'src/users/schemas/user.schema';
@@ -23,12 +21,12 @@ export class ArticleDto {
   @IsString()
   @IsOptional()
   @ApiProperty({ description: 'Article Tags' })
-  tags: Tag;
+  tags: string[];
 
   @IsString()
   @IsOptional()
   @ApiProperty({ description: 'Article categories' })
-  category: Category;
+  category: string;
 
   @IsString()
   @IsOptional()

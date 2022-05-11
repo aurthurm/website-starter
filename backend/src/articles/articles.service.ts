@@ -43,7 +43,7 @@ export class ArticlesService {
       featuredImage: file?.path,
     });
     createdArticle.slug = await getSlug(createdArticle.title);
-    await createdArticle.populate(['tags', 'category']);
+    await createdArticle.populate(['publisher', 'author']);
     return createdArticle.save();
   }
 
@@ -93,7 +93,7 @@ export class ArticlesService {
   }
 
   async findAll(): Promise<Article[]> {
-    return await this.articleModel.find().populate(['tags', 'categories']);
+    return await this.articleModel.find().populate(['publisher', 'author']);
   }
 
   async filterArticles(filters: ArticleFilter): Promise<Article[]> {
@@ -105,9 +105,14 @@ export class ArticlesService {
       params['status'] = filters.status;
     }
     if (filters.category) {
-      params['category.title'] = { $regex: new RegExp(filters.category, 'i') };
+      params['category'] = filters.category;
     }
-    return await this.articleModel.find(params);
+    if (filters.department) {
+      params['department'] = filters.department;
+    }
+    return await this.articleModel
+      .find(params)
+      .populate(['publisher', 'author']);
   }
 
   async paginate(
@@ -122,15 +127,20 @@ export class ArticlesService {
       params['status'] = filters.status;
     }
     if (filters.category) {
-      params['category.title'] = { $regex: new RegExp(filters.category, 'i') };
+      params['category'] = filters.category;
     }
+    if (filters.department) {
+      params['department'] = filters.department;
+    }
+
     const page = +options.page + 1;
     const results = await this.articleModel
       .find(params)
       .limit(options.limit)
       .skip(options.limit * (page - 1))
-      .populate(['tags', 'category', 'department']);
-    const count = await this.articleModel.countDocuments();
+      .populate(['publisher', 'author']);
+
+    const count = await this.articleModel.countDocuments(params);
     return new Pagination<Article>({
       results,
       total: count,
@@ -142,13 +152,13 @@ export class ArticlesService {
   async findOne(id: string): Promise<Article | null> {
     return this.articleModel
       .findOne({ _id: id })
-      .populate(['tags', 'category', 'department']);
+      .populate(['publisher', 'author']);
   }
 
   async findBySlug(slug: string): Promise<Article | null> {
     return await this.articleModel
       .findOne({ slug })
-      .populate(['tags', 'category', 'department']);
+      .populate(['publisher', 'author']);
   }
 
   async remove(id: string): Promise<Article> {

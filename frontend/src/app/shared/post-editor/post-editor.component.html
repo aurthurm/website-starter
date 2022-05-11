@@ -79,7 +79,7 @@
                             focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" 
                             aria-label="Default select example" formControlName="department">
                               <option selected></option>
-                              <option *ngFor="let department of divisions.departments" [value]="department._id">{{ department.title }}</option>
+                              <option *ngFor="let department of divisions.departments" [value]="department.title">{{ department.title }}</option>
                           </select>
                         </div>
                       </section>
@@ -106,7 +106,7 @@
                             focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" 
                             aria-label="Default select example" formControlName="category">
                               <option selected></option>
-                              <option *ngFor="let category of divisions.categories" [value]="category._id">{{ category.title }}</option>
+                              <option *ngFor="let category of divisions.categories" [value]="category.title">{{ category.title }}</option>
                           </select>
                         </div>
                       </section>
@@ -127,7 +127,7 @@
                   <div class="tab-content overflow-hidden border-l-2 bg-gray-100 border-indigo-500 leading-normal">
                     <div class="p-5">
                       <div *ngIf="postInfoIn?.post?.featuredImage">
-                        <img src="http://localhost:3000/{{postInfoIn?.post?.featuredImage}}" alt="">
+                        <img src="{{BACKEND_API_URL}}/{{postInfoIn?.post?.featuredImage}}" alt="">
                         <button 
                         (click)="removeImage($event, postInfoIn?.post?._id!, postInfoIn?.post?.featuredImage!)"
                         class="focus:ring-2 focus:ring-offset-2 focus:ring-blue-600 mt-4 inline-flex items-start justify-start p-2 bg-red-700 hover:bg-red-600 focus:outline-none shadow-md rounded">

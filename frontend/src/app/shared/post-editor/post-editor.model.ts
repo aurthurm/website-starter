@@ -6,9 +6,9 @@ export interface IPostSimple {
 
 export interface IPost extends IPostSimple {
     slug?: string;
-    tags?: IPostSimple[];
-    category?: IPostSimple;
-    department?: IPostSimple;
+    tags?: string[];
+    category?: string;
+    department?: string;
     status?: string;
     excerpt?: string;
     author?: any;

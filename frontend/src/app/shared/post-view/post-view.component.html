@@ -1,7 +1,7 @@
 <article>
     <h2 class="mb-4 text-2xl text-gray-700 font-bold">{{postData?.title}}</h2>
     <div class="my-8 p-0" *ngIf="postData?.featuredImage">
-        <img src="http://localhost:3000/{{postData?.featuredImage}}" alt="test image" class="object-contain">
+        <img src="{{BACKEND_API_URL}}/{{postData?.featuredImage}}" alt="test image" class="object-contain">
     </div>
     <div>
         <div [innerHTML]="postData?.content" class="no-tailwindcss-base"></div>

@@ -4,7 +4,7 @@
         *ngFor="let article of newsUpdate.articles"
         class="col-span-1 grid grid-cols-3 gap-4 mb-4">
             <div class="col-span-1" *ngIf="article?.featuredImage">
-                <img src="http://localhost:3000/{{article?.featuredImage}}" alt="test image" class="object-contain">
+                <img src="{{BACKEND_API_URL}}/{{article?.featuredImage}}" alt="test image" class="object-contain">
             </div>
             <div class="col-span-2" *ngIf="article?.featuredImage">
                 <a routerLink="./{{article.slug}}">
