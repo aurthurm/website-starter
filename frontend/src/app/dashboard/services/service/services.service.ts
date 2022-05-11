@@ -1,13 +1,14 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, Observable } from 'rxjs';
+import { BACKEND_API_URL } from 'src/constants';
 import { IService } from '../services.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ServicesService {
-  private readonly apiURL = "http://localhost:3000/services";
+  private readonly apiURL = BACKEND_API_URL + "/services";
 
   constructor(private http: HttpClient) { }
 

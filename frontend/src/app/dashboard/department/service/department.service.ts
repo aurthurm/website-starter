@@ -5,13 +5,14 @@ import { catchError } from 'rxjs/operators'
 
 import { IDepartment } from '../department.model'
 import { IPaginated } from 'src/app/shared/models/app-data';
+import { BACKEND_API_URL } from 'src/constants';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DepartmentService {
 
-  private readonly apiURL = "http://localhost:3000/departments";
+  private readonly apiURL = BACKEND_API_URL + "/departments";
 
   constructor(private http: HttpClient) { }
 

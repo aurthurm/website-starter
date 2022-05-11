@@ -4,13 +4,14 @@ import { Observable } from 'rxjs'
 import { catchError } from 'rxjs/operators'
 
 import { ICategory } from '../category.model';
+import { BACKEND_API_URL } from 'src/constants';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CategoriesService {
 
-  private readonly apiURL = "http://localhost:3000/divisions/categories";
+  private readonly apiURL = BACKEND_API_URL + "/divisions/categories";
 
   constructor(private http: HttpClient) { }
 

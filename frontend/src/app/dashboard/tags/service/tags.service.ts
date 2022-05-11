@@ -4,13 +4,14 @@ import { Observable } from 'rxjs'
 import { catchError } from 'rxjs/operators'
 
 import { ITag } from '../tag.model';
+import { BACKEND_API_URL } from 'src/constants';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TagsService {
 
-  private readonly apiURL = "http://localhost:3000/divisions/tags";
+  private readonly apiURL = BACKEND_API_URL + "/divisions/tags";
 
   constructor(private http: HttpClient) { }
 

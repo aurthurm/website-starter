@@ -5,7 +5,7 @@
         id="carousel-item-{{i+1}}"
         class="hidden duration-700 ease-in-out"
         attr.data-carousel-item="{{ i === 0 ? 'active' : ''}}">
-            <img src="http://localhost:3000/{{slide.featuredImage}}" class="block absolute top-1/2 left-1/2 w-full -translate-x-1/2 -translate-y-1/2 object-contain" alt="...">
+            <img src="{{BACKEND_API_URL}}/{{slide.featuredImage}}" class="block absolute top-1/2 left-1/2 w-full -translate-x-1/2 -translate-y-1/2 object-contain" alt="...">
             <div class="absolute grid content-center w-3/4 h-full bottom-0 inset-x-0 text-green-600 text-xs text-left leading-4 bg-gradient-to-r from-gray-200 via-white" >
                 <div class="pl-20">
                     <h4 class="text-xl text-gray-700">{{slide.title}}</h4>

@@ -5,13 +5,14 @@ import { catchError } from 'rxjs/operators'
 
 import { IArticle } from '../article.model'
 import { IPaginated } from 'src/app/shared/models/app-data';
+import { BACKEND_API_URL } from 'src/constants';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ArticleService {
 
-  private readonly apiURL = "http://localhost:3000/articles";
+  private readonly apiURL = BACKEND_API_URL + "/articles";
 
   constructor(private http: HttpClient) { }
 

@@ -4,13 +4,14 @@ import { Observable } from 'rxjs'
 import { catchError } from 'rxjs/operators'
 
 import { IAbout } from 'src/app/dashboard/about/about.model';
+import { BACKEND_API_URL } from 'src/constants';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AboutService {
 
-  private readonly apiURL = "http://localhost:3000/about";
+  private readonly apiURL = BACKEND_API_URL + "/about";
 
   constructor(private http: HttpClient) { }
 

@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable } from 'rxjs'
 import { catchError } from 'rxjs/operators'
+import { BACKEND_API_URL } from 'src/constants';
 
 
 @Injectable({
@@ -9,7 +10,7 @@ import { catchError } from 'rxjs/operators'
 })
 export class FileStorageService {
 
-  private readonly apiURL = "http://localhost:3000/file-storage";
+  private readonly apiURL = BACKEND_API_URL + "/file-storage";
 
   constructor(private http: HttpClient) { }
 

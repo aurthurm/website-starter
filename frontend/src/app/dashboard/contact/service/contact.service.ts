@@ -2,13 +2,14 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, Observable } from 'rxjs';
 import { IPaginated } from 'src/app/shared/models/app-data';
+import { BACKEND_API_URL } from 'src/constants';
 import { IContact } from '../contact.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ContactService {
-  private readonly apiURL = "http://localhost:3000/contact";
+  private readonly apiURL = BACKEND_API_URL + "/contact";
 
   constructor(private http: HttpClient) { }
 

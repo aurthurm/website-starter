@@ -2,12 +2,13 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { catchError, Observable } from 'rxjs';
+import { BACKEND_API_URL } from 'src/constants';
 
 @Injectable({
   providedIn: 'root'
 })
 export class LoginService {
-  private readonly apiURL = "http://localhost:3000/app";
+  private readonly apiURL = BACKEND_API_URL + "/app";
   constructor(
     private http: HttpClient,
     public router: Router,

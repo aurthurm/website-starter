@@ -1,13 +1,14 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, Observable } from 'rxjs';
+import { BACKEND_API_URL } from 'src/constants';
 import { ISlide } from '../slider.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SliderService {
-  private readonly apiURL = "http://localhost:3000/slider";
+  private readonly apiURL = BACKEND_API_URL + "/slider";
 
   constructor(private http: HttpClient) { }
 

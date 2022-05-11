@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 
 import { ISlide } from 'src/app/dashboard/slider/slider.model';
 import Carousel from 'src/app/shared/utils/carousel';
+import { environment } from 'src/environments/environment';
 
 
 @Component({
@@ -10,6 +11,8 @@ import Carousel from 'src/app/shared/utils/carousel';
   styleUrls: ['./slider.component.scss']
 })
 export class HomeSliderComponent implements OnInit {
+  BACKEND_API_URL = environment.BACKEND_API_URL;
+
   @Input() slides: ISlide[] = []
   carousel!: Carousel;
 

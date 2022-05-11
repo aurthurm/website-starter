@@ -5,6 +5,7 @@ import { IArticle } from 'src/app/dashboard/articles/article.model';
 import { ArticleService } from 'src/app/dashboard/articles/service/article.service';
 import { SliderService } from 'src/app/dashboard/slider/services/service.service';
 import { ISlide } from 'src/app/dashboard/slider/slider.model';
+import { environment } from 'src/environments/environment';
 
 interface IHomeNewsState {
     loading: boolean;
@@ -25,6 +26,8 @@ interface ICarouselState {
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
+  BACKEND_API_URL = environment.BACKEND_API_URL;
+
   homeNewsUpdate$!: Observable<IHomeNewsState>;
   slides$!: Observable<ICarouselState>;
 
