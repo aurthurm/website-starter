@@ -23,7 +23,7 @@ export class ArticlesService {
     author: unknown,
     file: Express.Multer.File,
   ): Promise<Article> {
-    if (['', null, undefined].includes(article._id)) {
+    if (['', null, undefined, 'null', 'undefined'].includes(article._id)) {
       delete article['_id'];
       return await this.createArticle(article, author, file);
     } else {

@@ -56,6 +56,15 @@ export class SliderUpdateComponent implements OnInit {
         error => { console.log("error: ", error) }
       )
     }
+    if(slide.action === 'remove-image'){
+      this.removeImage(slide.data)
+    }
+  }
+
+  removeImage(imageData: any): void {
+    this.sliderService.removeFeaturedImage$(imageData.id, imageData.filepath).subscribe(res => {
+      this.postInfo = { ...this.postInfo, post: res }
+    })
   }
 
 }

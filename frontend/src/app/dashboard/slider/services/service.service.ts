@@ -31,6 +31,11 @@ export class SliderService {
   .pipe(
     catchError(this.handleError)
   )
+  
+  removeFeaturedImage$ = (id: string, filepath: string) => <Observable<any>>this.http.delete<any>(`${this.apiURL}/featured-image/${id}?filepath=${filepath}`)
+  .pipe(
+    catchError(this.handleError)
+  ) 
 
   private handleError(error: HttpErrorResponse):Observable<never> {
     throw new Error('Method not implemented.');
