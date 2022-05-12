@@ -1,3 +1,5 @@
 docker build -t wbsite .
-docker run -d -i -t -p 4200:80/tcp wbsite
+docker run -d -i -t -p 4200:80/tcp --name wbsite
 docker logs container_id --follow
+docker container stop wbsite
+docker container rm wbsite

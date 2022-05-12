@@ -34,6 +34,7 @@ export class PostEditorComponent implements OnInit, OnChanges {
     tags: new FormArray([]),
     department: new FormControl(),
     excerpt: new FormControl(),
+    featuredImage: new FormControl(),
     file: new FormControl(),
   });
 
@@ -128,6 +129,7 @@ export class PostEditorComponent implements OnInit, OnChanges {
       content: post?.content,
       category: post?.category,
       department: post?.department,
+      featuredImage: post?.featuredImage ?? "",
       tags: post?.tags,
     });
   }

@@ -66,7 +66,6 @@ export class UpdateArticleComponent implements OnInit {
   }
 
   removeImage(imageData: any): void {
-    console.log("removeImage", imageData)
     this.articleService.removeFeaturedImage$(imageData.id, imageData.filepath).subscribe(res => {
       this.postInfo = { ...this.postInfo, post: res }
     })

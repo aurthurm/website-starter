@@ -56,6 +56,7 @@ export class ArticlesService {
     const article = await this.articleModel
       .findByIdAndUpdate(id, { ...updateData, slug })
       .setOptions({ overwrite: true, new: true });
+
     if (!article) {
       throw new NotFoundException();
     }
