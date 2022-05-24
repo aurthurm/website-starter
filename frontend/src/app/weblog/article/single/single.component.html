@@ -5,7 +5,24 @@
             <weblog-post-view [postData]="articleData.article"></weblog-post-view>
         </section>
         <section class="col-span-1 pl-16 pb-16 pt-4">
-            article metadata here
+            <h4 class="text-md text-gray-500 font-semibold uppercase">From Our Articles</h4>
+            <hr class="my-2">
+            <ul *ngIf="asideNews$ | async; let asideNews">
+                <li *ngFor="let article of asideNews.articles" class="mb-4 hover:text-green-600 hover:bg-gray-100">
+                    <a class="py-2 pr-2 cursor-pointer" routerLink="./../{{article.slug}}">{{article.title}}</a>
+                </li>
+            </ul>
+
+            <h4 class="mt-8 text-md text-gray-500 font-semibold uppercase">Categories</h4>
+            <hr class="my-2">
+            <ul *ngIf="categories$ |async; let categories">
+                <li *ngFor="let category of categories.data" class="mb-1 hover:text-green-600 hover:bg-gray-50">
+                    <a
+                    class="p-2 cursor-pointer" 
+                    routerLink="/articles" 
+                    [queryParams]="{ category: category?.title }">{{category.title}}</a>
+                </li>
+            </ul>
         </section>
     </div>
 </div>

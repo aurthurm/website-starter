@@ -35,12 +35,12 @@
               <span class="mr-1">KNOW US</span>
             </a>
             <ul *ngIf="abouts$ | async; let abouts"
-            class="absolute hidden bg-gray-800 text-gray-200 group-hover:block drop-shadow-md">
+            class="absolute hidden bg-gray-100 text-gray-700 group-hover:block drop-shadow-md">
               <li *ngFor="let about of abouts"
               class="">
                 <a 
                 routerLink="/about/{{ about?.title }}" 
-                class="py-2 px-4 block whitespace-nowrap hover:text-green-500">{{about?.title }}</a>
+                class="py-2 px-4 block whitespace-nowrap hover:text-green-500 hover:bg-gray-200">{{about?.title }}</a>
               </li>
             </ul>
           </div>
@@ -49,12 +49,12 @@
               <span class="mr-1">WHAT WE DO</span>
             </a>
             <ul *ngIf="services$ | async; let services"
-            class="absolute hidden bg-yellow-300 text-gray-700 group-hover:block drop-shadow-md">
+            class="absolute hidden bg-gray-100 text-gray-700 group-hover:block drop-shadow-md">
               <li *ngFor="let service of services"
               class="">
                 <a 
                 routerLink="/services/{{ service?.title }}" 
-                class="py-2 px-4 block whitespace-nowrap hover:text-green-500 ">{{service?.title }}</a>
+                class="py-2 px-4 block whitespace-nowrap hover:text-green-500 hover:bg-gray-200">{{service?.title }}</a>
               </li>
             </ul>
           </div>
