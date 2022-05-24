@@ -1,3 +1,7 @@
-docker build -t nmrl_web .
-docker run -t -d -i -p 0.0.0.0:5000:5000/tcp -e BACKEND_SERVER_PORT=5000 -e MONGODB_SERVER_HOST=192.168.122.185 -e MONGODB_DATABASE_NAME="nmrl_website" nmrl_web
-docker ps
+#Usefull commands
+
+docker build -t website_backend .
+docker run -t -d -i -p 0.0.0.0:5000:5000/tcp -v /home/lims/nmrl-website/data/uploads:/usr/src/app/uploads -e BACKEND_SERVER_PORT=5000 -e MONGODB_SERVER_HOST=192.168.0.40 -e MONGODB_DATABASE_NAME=nmrl_web --name website_backend website_backend:latest
+docker rm website_backend
+docker stop website_backend
+docker logs website_backend --follow

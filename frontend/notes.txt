@@ -1,5 +1,5 @@
-docker build -t wbsite .
-docker run -d -i -t -p 4200:80/tcp --name wbsite
-docker logs container_id --follow
-docker container stop wbsite
-docker container rm wbsite
+docker build -t website_frontend .
+docker run -d -i -t -p 4200:80/tcp --name website_frontend website_frontend:latest
+docker logs website_frontend --follow
+docker stop website_frontend
+docker rm website_frontend

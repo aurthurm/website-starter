@@ -32,6 +32,7 @@ import { LoginModule } from './login/login.module';
     },
     ModalStateService,
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+ 
 })
 export class AppModule { }

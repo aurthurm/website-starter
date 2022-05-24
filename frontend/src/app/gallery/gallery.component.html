@@ -1,0 +1,9 @@
+<div class="gallery-preview">
+    <div *ngFor="let img of gallery" (click)="selectImage(img.src)">
+        <div *ngIf="isSelected(img.src)"> selected</div>
+        <img  src="img.src"  alt="">
+
+    </div>
+</div>
+
+<button (click)="closeGallery()">close</button>

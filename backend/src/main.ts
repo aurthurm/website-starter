@@ -9,12 +9,13 @@ async function bootstrap() {
     cors: true,
     logger: ['error', 'warn', 'log', 'verbose', 'debug'], // getLogLevels(process.env.NODE_ENV === 'production'),
   });
-  app.use(
-    helmet({
-      crossOriginResourcePolicy: false,
-      crossOriginEmbedderPolicy: false,
-    }),
-  );
+  // app.use(
+  //   helmet({
+  //     crossOriginResourcePolicy: false,
+  //     crossOriginEmbedderPolicy: false,
+  //     contentSecurityPolicy: false,
+  //   }),
+  // );
   const config = new DocumentBuilder()
     .setTitle('NMRL WEBSITE API')
     .setDescription('The api for nmrl website')

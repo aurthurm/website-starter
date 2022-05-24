@@ -16,6 +16,7 @@ export class PostEditorComponent implements OnInit, OnChanges {
   BACKEND_API_URL = environment.BACKEND_API_URL;
   @Output() public postOut = new EventEmitter<any>();
   @Input() public postInfoIn!: IPostInfo;
+  preloader = true;
 
   divisions = {
     departments: [] as IPostSimple[],

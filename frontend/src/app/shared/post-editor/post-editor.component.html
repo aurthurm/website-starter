@@ -127,7 +127,7 @@
                   <div class="tab-content overflow-hidden border-l-2 bg-gray-100 border-indigo-500 leading-normal">
                     <div class="p-5">
                       <div *ngIf="postInfoIn?.post?.featuredImage">
-                        <img src="{{BACKEND_API_URL}}/{{postInfoIn?.post?.featuredImage}}" alt="">
+                        <img src="{{BACKEND_API_URL}}/{{postInfoIn?.post?.featuredImage}}" (loadstart)="preloader = true" (error)="img.src =''" alt="" #img>
                         <button 
                         (click)="removeImage($event, postInfoIn?.post?._id!, postInfoIn?.post?.featuredImage!)"
                         class="focus:ring-2 focus:ring-offset-2 focus:ring-blue-600 mt-4 inline-flex items-start justify-start p-2 bg-red-700 hover:bg-red-600 focus:outline-none shadow-md rounded">
@@ -159,4 +159,7 @@
       </div>
     </form>
   </div>
+
+
+  <app-gallery></app-gallery>
   

@@ -29,6 +29,9 @@ import { ConfigModule } from '@nestjs/config';
       rootPath: join(__dirname, '..', 'uploads'),
       serveRoot: '/uploads',
     }),
+    ServeStaticModule.forRoot({
+      rootPath: join(__dirname, '../../frontend/dist', 'nmrl-wbsite'),
+    }),
     UsersModule,
     DivisionsModule,
     ArticlesModule,
