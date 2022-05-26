@@ -92,7 +92,7 @@ export class PostEditorComponent implements OnInit, OnChanges {
         'searchreplace', 'visualblocks', 'code', 'fullscreen', 'wordcount', 'pagebreak', 'nonbreaking',
         'insertdatetime', 'media', 'table', 'code', 'help', 'directionality', 'wordcount', 
       ],
-      images_upload_url: 'https://locahost:3000/file-storage/upload-one',
+      images_upload_url: this.BACKEND_API_URL + '/file-storage/upload-one',
       content_css: "document",
       save_enablewhendirty: true,
       save_onsavecallback: function () { 
