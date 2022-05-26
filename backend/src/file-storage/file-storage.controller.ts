@@ -23,9 +23,7 @@ export class FileStorageController {
   @Post('upload-one')
   @UseInterceptors(FileInterceptor('file', multerOptions))
   async uploadFile(@UploadedFile() file: Express.Multer.File, @Request() req) {
-    console.log(req.headers);
     imageResizer(file);
-    // return { ...file };
     return {
       location: 'http://' + req.headers.host + '/' + file.path,
       extras: file,
