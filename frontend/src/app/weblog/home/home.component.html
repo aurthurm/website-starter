@@ -4,10 +4,10 @@
     </div>
 </div>
 
-<div class="container mx-auto mb-6 mt-10">
+<div class="container mx-auto mb-6 mt-10 overflow-x-auto">
     <h4 class="text-sm text-gray-600 font-semibold uppercase">A brief insight of National Microbiology Reference Laboratory</h4>
     <hr class="mb-6">
-    <div class="flex justify-between items-center">
+    <div class="flex flex-wrap md:justify-between md:items-center">
         <div class="py-4 mr-2">
             <img src="/assets/images/sadcas-acc.png" alt="" class="h-20">
         </div>
@@ -22,51 +22,53 @@
             <div class="text-2xl text-gray-600 font-semibold">4</div>
             <div class="text-l text-gray-500 font-bold">Centers of Excellence</div>
         </div>
-        <div class="mx-2 p-4 h-32 w-32 border-2 border-green-300 rounded-full flex flex-col justify-center items-center text-center">
+        <!-- <div class="mx-2 p-4 h-32 w-32 border-2 border-green-300 rounded-full flex flex-col justify-center items-center text-center">
             <div class="text-2xl text-gray-600 font-semibold">8</div>
             <div class="text-l text-gray-500 font-bold">Test Services</div>
-        </div>
+        </div> -->
     </div>
 </div>
 
-<div class="container mx-auto my-10">
-    <h4 class="text-sm text-gray-600 font-semibold uppercase">From Our News and Updates ...</h4>
-    <hr class="mb-6">
-    <div class="grid grid-cols-2 gap-4" *ngIf="(homeNewsUpdate$ | async) as newsUpdate" >
-        <article 
-        *ngFor="let article of newsUpdate.articles?.slice(0, 2)"
-        class="col-span-1 grid grid-cols-3 gap-4 mb-4">
-            <div class="col-span-1" *ngIf="article?.featuredImage">
-                <img src="{{BACKEND_API_URL}}/{{article?.featuredImage}}" alt="test image" class="object-contain">
-            </div>
-            <div class="col-span-2" *ngIf="article?.featuredImage">
-                <a routerLink="./articles/{{article.slug}}">
-                    <h4 class="mb-4 text-gray-500 font-semibold uppercase line-clamp-2">{{ article?.title }}</h4>
-                </a>
-                <p class="text-normal font-normal text-gray-700 line-clamp-3" [innerHTML]="article?.excerpt ?? article?.content"></p>
-            </div>
-            <div class="col-span-3" *ngIf="!article?.featuredImage">
-                <a routerLink="./{{article.slug}}">
-                    <h4 class="mb-4 text-gray-500 font-semibold uppercase line-clamp-2">{{ article?.title }}</h4>
-                </a>
-                <p class="text-normal font-normal text-gray-700 line-clamp-3" [innerHTML]="article?.excerpt ?? article?.content"></p>
-            </div>
-        </article>
+<section *ngIf="(homeNewsUpdate$ | async) as newsUpdate">
+    <div class="container mx-auto my-10" *ngIf="newsUpdate.articles?.length! > 0">
+        <h4 class="text-sm text-gray-600 font-semibold uppercase">From Our News and Updates ...</h4>
+        <hr class="mb-6">
+        <div class="md:grid md:grid-cols-2 md:gap-4"  >
+            <article 
+            *ngFor="let article of newsUpdate.articles?.slice(0, 2)"
+            class="md:col-span-1 grid grid-cols-3 gap-4 mb-4">
+                <div class="col-span-1" *ngIf="article?.featuredImage">
+                    <img src="{{BACKEND_API_URL}}/{{article?.featuredImage}}" alt="test image" class="object-contain">
+                </div>
+                <div class="col-span-2" *ngIf="article?.featuredImage">
+                    <a routerLink="./articles/{{article.slug}}">
+                        <h4 class="mb-4 text-gray-500 font-semibold uppercase line-clamp-2">{{ article?.title }}</h4>
+                    </a>
+                    <p class="text-normal font-normal text-gray-700 line-clamp-3" [innerHTML]="article?.excerpt ?? article?.content"></p>
+                </div>
+                <div class="col-span-3" *ngIf="!article?.featuredImage">
+                    <a routerLink="./{{article.slug}}">
+                        <h4 class="mb-4 text-gray-500 font-semibold uppercase line-clamp-2">{{ article?.title }}</h4>
+                    </a>
+                    <p class="text-normal font-normal text-gray-700 line-clamp-3" [innerHTML]="article?.excerpt ?? article?.content"></p>
+                </div>
+            </article>
+        </div>
     </div>
-</div>
+</section>
 
 <div class="container mx-auto mt-10 flex justify-center items-center">
     <hr class="grow">
     <div class="grow-0 mx-4 text-l text-gray-600 font-semibold uppercase">Our Partners</div>
     <hr class="grow">
 </div>
-<div class="container mx-auto flex justify-center items-center py-8">
+<div class="container mx-auto flex flex-wrap justify-center items-center py-8">
     <div class="p-4 mr-6">
         <img src="/assets/images/logo.png" alt="" class="h-32">
     </div>
     <div class="p-4 ml-6 mr-2">
         <img src="/assets/images/pepfar.jpg" alt="" class="h-32">
-    </div>
+    </div>        
     <div class="p-4 mx-2">
         <img src="/assets/images/undp.png" alt="" class="h-32">
     </div>

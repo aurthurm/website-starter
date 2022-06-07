@@ -1,10 +1,10 @@
 <div class="container mx-auto">
-    <div class="grid grid-cols-4 py-12">
+    <div class="md:grid md:grid-cols-4 py-12">
         <section  *ngIf="articleData$ | async; let articleData"
         class="px-16 pb-16 pt-4 col-span-3 bg-white border border-gray-200">
             <weblog-post-view [postData]="articleData.article"></weblog-post-view>
         </section>
-        <section class="col-span-1 pl-16 pb-16 pt-4">
+        <section class="col-span-1 pl-16 pb-16 pt-4 mt-8 md:mt-0">
             <h4 class="text-md text-gray-500 font-semibold uppercase">From Our Articles</h4>
             <hr class="my-2">
             <ul *ngIf="asideNews$ | async; let asideNews">

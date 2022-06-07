@@ -1,8 +1,9 @@
 <div class="container mx-auto">
-    <div class="grid grid-cols-2 gap-4 py-16" *ngIf="(articleState$ | async) as newsUpdate" >
+    <div class="md:grid md:grid-cols-2 md:gap-4 py-16" *ngIf="(articleState$ | async) as newsUpdate" >
+        <div></div>
         <article 
         *ngFor="let article of newsUpdate.articles"
-        class="col-span-1 grid grid-cols-3 gap-4 mb-4">
+        class="md:col-span-1 grid grid-cols-3 gap-4 mb-4">
             <div class="col-span-1" *ngIf="article?.featuredImage">
                 <img src="{{BACKEND_API_URL}}/{{article?.featuredImage}}" alt="test image" class="object-contain">
             </div>

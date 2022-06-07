@@ -3,7 +3,7 @@
 </section>
 <header id="site-header" class="bg-white">
   <div class="">
-    <section class="container mx-auto flex justify-between items-center py-2">
+    <section class="container mx-auto sm:flex sm:justify-between sm:items-center py-2">
       <div class="flex justify-start items-center">
         <a class="" href="">
           <img src="/assets/images/logo.png" alt="" class="col-span-1 object-contain h-24" />
@@ -15,7 +15,7 @@
           <span class="font-thin text-xs text-gray-500">Leaders in pioneering heathcare.</span>
         </div>
       </div>
-      <div>
+      <div class="hidden md:block">
         <div class="mb-4">
           <a class="p-1 text-gray-300 w-100 hover:text-gray-600" routerLink="/admin">Admin Login</a>
         </div>
@@ -29,7 +29,85 @@
         <div class="flex justify-around">
           <a class="py-2 px-3 hover:bg-green-700" routerLink="/">IN A GLANCE</a>
         </div>
-        <div class="flex justify-around">
+        <div class="hidden md:flex justify-around">
+          <div class="group inline-block relative z-50">
+            <a class="px-4 py-2 hover:bg-green-700 font-semibold inline-flex items-center cursor-pointer">
+              <span class="mr-1">KNOW US</span>
+            </a>
+            <ul *ngIf="abouts$ | async; let abouts"
+            class="absolute hidden bg-gray-100 text-gray-700 group-hover:block drop-shadow-md">
+              <li *ngFor="let about of abouts"
+              class="">
+                <a 
+                routerLink="/about/{{ about?.title }}" 
+                class="py-2 px-4 block whitespace-nowrap hover:text-green-500 hover:bg-gray-200">{{about?.title }}</a>
+              </li>
+            </ul>
+          </div>
+          <div class="group inline-block relative z-50">
+            <a class="px-4 py-2 hover:bg-green-700 font-semibold inline-flex items-center cursor-pointer">
+              <span class="mr-1">WHAT WE DO</span>
+            </a>
+            <ul *ngIf="services$ | async; let services"
+            class="absolute hidden bg-gray-100 text-gray-700 group-hover:block drop-shadow-md">
+              <li *ngFor="let service of services"
+              class="">
+                <a 
+                routerLink="/services/{{ service?.title }}" 
+                class="py-2 px-4 block whitespace-nowrap hover:text-green-500 hover:bg-gray-200">{{service?.title }}</a>
+              </li>
+            </ul>
+          </div>
+          <div class="group inline-block relative z-50">
+            <a 
+            class="px-4 py-2 hover:bg-green-700 font-semibold inline-flex items-center cursor-pointer">
+              <span class="mr-1">CENTERS OF EXCELENCE</span>
+            </a>
+            <ul *ngIf="departments$ | async; let departments"
+            class="absolute hidden bg-gray-100 text-gray-500 group-hover:block drop-shadow-md">
+              <li *ngFor="let department of departments"
+              class="">
+                <a 
+                routerLink="/departments/{{ department?.title }}" 
+                class="py-2 px-4 block whitespace-nowrap hover:text-green-500 hover:bg-gray-200">{{department?.title }}</a>
+              </li>
+            </ul>
+          </div>
+          <div class="group inline-block relative z-50" *ngIf="articlesExist">
+            <a routerLink="/articles"
+            class="px-4 py-2 hover:bg-green-700 font-semibold inline-flex items-center cursor-pointer">
+              <span class="mr-1">ARTICLES</span>
+            </a>
+            <ul *ngIf="categories$ | async; let categories"
+            class="absolute hidden bg-gray-100 text-gray-500 group-hover:block drop-shadow-md">
+              <li *ngFor="let category of categories"
+              class="">
+                <a 
+                routerLink="/articles" 
+                [queryParams]="{ category: category?.title }"
+                class="py-2 px-4 block whitespace-nowrap hover:text-green-500 hover:bg-gray-200">{{category?.title }}</a>
+              </li>
+            </ul>
+          </div>
+          <a class="py-2 px-4 hover:bg-green-700" routerLink="/contact">STAY IN TOUCH</a>
+        </div>
+        <!-- Mobile Menu -->
+        <div class="md:hidden flex items-center" (click)="toggleMenu()">
+          <button class="outline-none mobile-menu-button">
+            <svg
+              class="w-6 h-6 text-gray-100"
+              fill="none"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+            <path d="M4 6h16M4 12h16M4 18h16"></path>
+            </svg>
+          </button>
+        </div>
+        <div id="mobile-menu" class="hidden">
           <div class="group inline-block relative z-50">
             <a class="px-4 py-2 hover:bg-green-700 font-semibold inline-flex items-center cursor-pointer">
               <span class="mr-1">KNOW US</span>
@@ -91,6 +169,7 @@
           </div>
           <a class="py-2 px-4 hover:bg-green-700" routerLink="/contact">STAY IN TOUCH</a>
         </div>
+
       </nav>
     </div>
   </div>
