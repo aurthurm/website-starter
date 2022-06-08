@@ -4,7 +4,7 @@
 <header id="site-header" class="bg-white">
   <div class="">
     <section class="container mx-auto sm:flex sm:justify-between sm:items-center py-2">
-      <div class="flex justify-start items-center">
+      <div class="flex justify-start items-center mx-2">
         <a class="" href="">
           <img src="/assets/images/logo.png" alt="" class="col-span-1 object-contain h-24" />
         </a>
@@ -91,7 +91,7 @@
           </div>
           <a class="py-2 px-4 hover:bg-green-700" routerLink="/contact">STAY IN TOUCH</a>
         </div>
-        <!-- Mobile Menu -->
+        <!-- Mobile toggle -->
         <div class="md:hidden flex items-center" (click)="toggleMenu()">
           <button class="outline-none mobile-menu-button">
             <svg
@@ -107,69 +107,71 @@
             </svg>
           </button>
         </div>
+      </nav>
+      <!-- mobile nav -->
+      <nav class="md:hidden container mx-auto text-gray-100 font-semibold text-sm">
         <div id="mobile-menu" class="hidden">
-          <div class="group inline-block relative z-50">
-            <a class="px-4 py-2 hover:bg-green-700 font-semibold inline-flex items-center cursor-pointer">
+          <div class="group block relative z-50">
+            <a class="px-4 py-2 w-full hover:bg-green-700 font-semibold inline-flex items-center cursor-pointer">
               <span class="mr-1">KNOW US</span>
             </a>
             <ul *ngIf="abouts$ | async; let abouts"
-            class="absolute hidden bg-gray-100 text-gray-700 group-hover:block drop-shadow-md">
+            class="hidden bg-green-400 text-gray-700 group-hover:block drop-shadow-md">
               <li *ngFor="let about of abouts"
               class="">
                 <a 
                 routerLink="/about/{{ about?.title }}" 
-                class="py-2 px-4 block whitespace-nowrap hover:text-green-500 hover:bg-gray-200">{{about?.title }}</a>
+                class="py-2 px-4 block whitespace-nowrap hover:text-green-500 hover:bg-green-600">{{about?.title }}</a>
               </li>
             </ul>
           </div>
-          <div class="group inline-block relative z-50">
-            <a class="px-4 py-2 hover:bg-green-700 font-semibold inline-flex items-center cursor-pointer">
+          <div class="group block relative z-50">
+            <a class="px-4 py-2 w-full hover:bg-green-700  font-semibold inline-flex items-center cursor-pointer">
               <span class="mr-1">WHAT WE DO</span>
             </a>
             <ul *ngIf="services$ | async; let services"
-            class="absolute hidden bg-gray-100 text-gray-700 group-hover:block drop-shadow-md">
+            class="hidden bg-green-400 text-gray-700 group-hover:block drop-shadow-md">
               <li *ngFor="let service of services"
               class="">
                 <a 
                 routerLink="/services/{{ service?.title }}" 
-                class="py-2 px-4 block whitespace-nowrap hover:text-green-500 hover:bg-gray-200">{{service?.title }}</a>
+                class="py-2 px-4 block whitespace-nowrap hover:text-green-500 hover:bg-green-600">{{service?.title }}</a>
               </li>
             </ul>
           </div>
-          <div class="group inline-block relative z-50">
+          <div class="group block relative z-50">
             <a 
-            class="px-4 py-2 hover:bg-green-700 font-semibold inline-flex items-center cursor-pointer">
+            class="px-4 py-2 w-full hover:bg-green-700 font-semibold inline-flex items-center cursor-pointer">
               <span class="mr-1">CENTERS OF EXCELENCE</span>
             </a>
             <ul *ngIf="departments$ | async; let departments"
-            class="absolute hidden bg-gray-100 text-gray-500 group-hover:block drop-shadow-md">
+            class="hidden bg-green-400 text-gray-500 group-hover:block drop-shadow-md">
               <li *ngFor="let department of departments"
               class="">
                 <a 
                 routerLink="/departments/{{ department?.title }}" 
-                class="py-2 px-4 block whitespace-nowrap hover:text-green-500 hover:bg-gray-200">{{department?.title }}</a>
+                class="py-2 px-4 block whitespace-nowrap hover:text-green-500 hover:bg-green-600">{{department?.title }}</a>
               </li>
             </ul>
           </div>
-          <div class="group inline-block relative z-50">
+          <div class="group block relative z-50">
             <a routerLink="/articles"
-            class="px-4 py-2 hover:bg-green-700 font-semibold inline-flex items-center cursor-pointer">
+            class="px-4 py-2 w-full hover:bg-green-700 font-semibold inline-flex items-center cursor-pointer">
               <span class="mr-1">ARTICLES</span>
             </a>
             <ul *ngIf="categories$ | async; let categories"
-            class="absolute hidden bg-gray-100 text-gray-500 group-hover:block drop-shadow-md">
+            class="hidden bg-green-400 text-gray-500 group-hover:block drop-shadow-md">
               <li *ngFor="let category of categories"
               class="">
                 <a 
                 routerLink="/articles" 
                 [queryParams]="{ category: category?.title }"
-                class="py-2 px-4 block whitespace-nowrap hover:text-green-500 hover:bg-gray-200">{{category?.title }}</a>
+                class="py-2 px-4 block whitespace-nowrap hover:text-green-500 hover:bg-green-600">{{category?.title }}</a>
               </li>
             </ul>
           </div>
-          <a class="py-2 px-4 hover:bg-green-700" routerLink="/contact">STAY IN TOUCH</a>
+          <a class="py-2 px-4 w-full hover:bg-green-700" routerLink="/contact">STAY IN TOUCH</a>
         </div>
-
       </nav>
     </div>
   </div>
