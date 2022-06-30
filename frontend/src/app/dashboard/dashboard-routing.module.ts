@@ -3,11 +3,16 @@ import { RouterModule, Routes } from '@angular/router';
 import { CategoriesComponent } from './categories/categories/categories.component';
 import { DashboardComponent } from './dashboard.component';
 import { TagsComponent } from './tags/tags/tags.component';
+import { UsersComponent } from './users/users/users.component';
 
 const routes: Routes = [
   { 
     path: 'overview',
     component: DashboardComponent,
+  },
+  { 
+    path: 'users',
+    component: UsersComponent
   },
   { 
     path: 'tags',

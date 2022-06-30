@@ -1,5 +1,6 @@
-<div >
+<div class="">
 	<div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+
 		<div class="p-4 flex justify-between items-center">
             <div>
                 <button
@@ -38,7 +39,8 @@
             </div>
 		</div>
 
-        <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+        <table *ngIf="(dataState$ | async) as dataState"
+         class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
             <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                 <tr>
                     <th scope="col" class="px-6 py-3">
@@ -52,8 +54,8 @@
                     </th>
                 </tr>
             </thead>
-            <tbody *ngIf="(dataState$ | async) as dataState">
-                <tr *ngFor="let contact of dataState?.data?.items"
+            <tbody *ngFor="let contact of dataState?.data?.items">
+                <tr (click)="viewMessage(contact)"
                     class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">    
                     <td class="px-6 py-2 text-l " [ngClass]="contact?.opened === true ? 'text-gray-400 font-semibold italic' : 'text-gray-700 font-semibold'">
                         {{ contact?.subject }}
@@ -65,10 +67,49 @@
                         {{ contact?.email }}
                     </th> 
                 </tr>
-            
+                <tr class="bg-gray-200 border-b" *ngIf="activeContact === contact._id">  
+                    <td class="px-6 py-2" colspan="3">
+                        <article>
+
+                            <div class="grid grid-cols-11">
+                                <div class="col-span-1 text-l font-semibold text-gray-600">creator</div>
+                                <div class="col-span-10">{{ contact?.firstName }} {{ contact?.lastName }}</div>
+                            </div>
+
+                            <div class="grid grid-cols-11">
+                                <div class="col-span-1 text-l font-semibold text-gray-600">email</div>
+                                <div class="col-span-10">{{ contact?.email }}</div>
+                            </div>
+
+                            <div class="grid grid-cols-11">
+                                <div class="col-span-1 text-l font-semibold text-gray-600">subject</div>
+                                <div class="col-span-10">{{ contact?.subject }}</div>
+                            </div>
+
+                            <div class="grid grid-cols-11">
+                                <div class="col-span-1 text-l font-semibold text-gray-600">created</div>
+                                <div class="col-span-10">{{ contact?.createdAt }}</div>
+                            </div>
+
+                            <div class="grid grid-cols-11">
+                                <div class="col-span-1 text-l font-semibold text-gray-600">opened</div>
+                                <div class="col-span-10">{{ contact?.dateOpened }}</div>
+                            </div>
+
+                            <hr class="my-2 border-white">
+
+                            <div class="grid grid-cols-11">
+                                <div class="col-span-1 text-l font-semibold text-gray-600">Message</div>
+                                <div class="col-span-10">{{ contact.message }} </div>
+                            </div>
+
+                        </article>
+                    </td> 
+                </tr>
             </tbody>
         </table>
 
-    
     </div>
 </div>
+
+

@@ -29,6 +29,25 @@
     </div>
 </div>
 
+
+<section *ngIf="(homeServices$ | async) as services">
+    <div class="my-10" *ngIf="services?.data?.length! > 0" id="homeServices">
+        <div class="container mx-auto py-12 md:grid md:grid-cols-2 md:gap-4"  >
+            <article 
+            *ngFor="let service of services.data?.slice(0, 4)"
+            class="md:col-span-1 grid grid-cols-3 gap-8 mb-4">
+                <div class="col-span-3 text-white">
+                    <a routerLink="/services/{{ service?.title }}">
+                        <h4 class="mb-2 font-bold text-xl uppercase line-clamp-2">{{ service?.title }}</h4>
+                    </a>
+                    <p class="text-normal font-normal line-clamp-3" [innerHTML]="service?.content"></p>
+                </div>
+            </article>
+        </div>
+    </div>
+</section>
+
+
 <section *ngIf="(homeNewsUpdate$ | async) as newsUpdate">
     <div class="container mx-auto my-10" *ngIf="newsUpdate.articles?.length! > 0">
         <h4 class="text-sm text-gray-600 font-semibold uppercase">From Our News and Updates ...</h4>
@@ -62,17 +81,23 @@
     <div class="grow-0 mx-4 text-l text-gray-600 font-semibold uppercase">Our Partners</div>
     <hr class="grow">
 </div>
-<div class="container mx-auto flex flex-wrap justify-center items-center py-8">
+<div class="container mx-auto flex flex-wrap justify-between items-center py-8">
     <div class="p-4 mr-6">
-        <img src="/assets/images/logo.png" alt="" class="h-32">
-    </div>
-    <div class="p-4 ml-6 mr-2">
-        <img src="/assets/images/pepfar.jpg" alt="" class="h-32">
-    </div>        
-    <div class="p-4 mx-2">
-        <img src="/assets/images/undp.png" alt="" class="h-32">
+        <img src="/assets/images/global_fund.png" alt="" class="h-32">
     </div>
     <div class="p-4 mx-2">
         <img src="/assets/images/brti.png" alt="" class="h-32">
+    </div>      
+    <div class="p-4 mx-2">
+        <img src="/assets/images/undp.png" alt="" class="h-32">
     </div>
+    <div class="p-4 mr-6">
+        <img src="/assets/images/chai.jpg" alt="" class="h-32">
+    </div>
+    <div class="p-4 mr-6">
+        <img src="/assets/images/zimtec1.jpeg" alt="" class="h-32">
+    </div>
+    <div class="p-4 ml-6 mr-2">
+        <img src="/assets/images/pepfar.jpg" alt="" class="h-32">
+    </div>  
 </div>

@@ -3,6 +3,12 @@ import { ApiProperty } from '@nestjs/swagger';
 
 export class CreateUserDto {
   @IsString()
+  @ApiProperty({
+    description: 'Mongo ID',
+  })
+  readonly _id: string;
+
+  @IsString()
   @IsNotEmpty()
   @ApiProperty({
     description: 'First Name',

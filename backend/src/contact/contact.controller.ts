@@ -37,6 +37,13 @@ export class ContactController {
     return await this.contactService.contactCreate(createDto);
   }
 
+  @Post('/mark-as-read/:id')
+  @ApiOperation({ summary: 'Read Contact message' })
+  @ApiResponse({ status: 403, description: 'Forbidden.', type: Contact })
+  async markAsRead(@Param('id') id: string) {
+    return await this.contactService.markAsRead(id);
+  }
+
   @Get('/paginated')
   async paginated(@Request() request): Promise<Pagination<Contact>> {
     return await this.contactService.paginate({

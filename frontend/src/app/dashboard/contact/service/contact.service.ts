@@ -28,7 +28,7 @@ export class ContactService {
     catchError(this.handleError)
   )
 
-  read$ = (id: string) => <Observable<IContact>>this.http.post<IContact>(`${this.apiURL}/read/${id}`, {})
+  read$ = (id: string) => <Observable<IContact>>this.http.post<IContact>(`${this.apiURL}/mark-as-read/${id}`, {})
   .pipe(
     catchError(this.handleError)
   )

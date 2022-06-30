@@ -40,7 +40,7 @@ export class HomeSliderComponent implements OnInit {
 
     const options = {
       activeItemPosition: 1,
-      interval: 3000,
+      interval: 9000,
       
       indicators: {
           activeClasses: 'bg-white dark:bg-gray-800',

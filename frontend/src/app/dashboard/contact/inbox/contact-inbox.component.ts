@@ -12,6 +12,7 @@ import { ContactService } from '../service/contact.service';
 export class ContactInboxComponent implements OnInit {
   dataState$!: Observable<IAppDataState<IContact>>;
   private dataSubject = new BehaviorSubject<IAppData<IContact>>({} as any);
+  activeContact = "";
 
   constructor(
     private contactService: ContactService
@@ -64,4 +65,30 @@ export class ContactInboxComponent implements OnInit {
       catchError((error: any) => of({ loading:false, error }))
     )
   }
+
+  viewMessage(contact: IContact): void {
+    if(!contact?.opened){
+      this.dataState$ = this.contactService.read$(contact._id!)
+      .pipe(
+        map(res => {
+          if(res._id){
+            const index = this.dataSubject.value.items?.findIndex(item => item._id === res._id)!;
+            this.dataSubject.value.items![index] = res;
+          }
+          return { loading: false, data: this.dataSubject.value }
+        }),
+        startWith({ loading: false, data: this.dataSubject.value }),
+        catchError((error: any) => of({ loading:false, error }))
+      )  
+    }
+
+    if(this.activeContact === contact?._id){
+      this.activeContact = ""
+    } else {
+      this.activeContact = contact?._id ?? "";
+    }
+    
+  }
+
+
 }

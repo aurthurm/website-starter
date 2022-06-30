@@ -93,6 +93,20 @@ export class ArticlesService {
     return await article.save();
   }
 
+  async categoryUpdate(category: string, updated: string) {
+    await this.articleModel.updateMany(
+      { category },
+      { $set: { category: updated } },
+    );
+  }
+
+  async departmentUpdate(department: string, updated: string) {
+    await this.articleModel.updateMany(
+      { department },
+      { $set: { department: updated } },
+    );
+  }
+
   async findAll(): Promise<Article[]> {
     return await this.articleModel.find().populate(['publisher', 'author']);
   }

@@ -5,3 +5,7 @@ docker run -t -d -i -p 0.0.0.0:5000:5000/tcp -v /home/lims/nmrl-website/data/upl
 docker rm website_backend
 docker stop website_backend
 docker logs website_backend --follow
+
+# create user and Password
+# login
+curl -X POST http://192.168.0.40:8080/app/auth/login -d '{"username": "admin", "password": "admin"}' -H "Content-Type: application/json"

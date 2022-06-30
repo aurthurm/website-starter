@@ -8,4 +8,5 @@ export interface IContact {
     message: string,
     opened?: boolean;
     dateOpened?: string;
+    createdAt?: string;
 }

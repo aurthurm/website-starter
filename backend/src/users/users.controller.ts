@@ -24,7 +24,7 @@ export class UsersController {
   })
   @ApiResponse({ status: 403, description: 'Forbidden.', type: User })
   async create(@Body() createCatDto: CreateUserDto) {
-    await this.usersService.create(createCatDto);
+    return await this.usersService.saveUser(createCatDto);
   }
 
   @Get()
@@ -34,7 +34,7 @@ export class UsersController {
     type: User,
   })
   async findAll(): Promise<User[]> {
-    return this.usersService.findAll();
+    return await this.usersService.findAll();
   }
 
   @Get(':id')
@@ -44,7 +44,7 @@ export class UsersController {
     type: User,
   })
   async findOne(@Param('id') id: string): Promise<User> {
-    return this.usersService.findOne(id);
+    return await this.usersService.findOne(id);
   }
 
   @Delete(':id')
@@ -54,6 +54,6 @@ export class UsersController {
     type: User,
   })
   async delete(@Param('id') id: string) {
-    return this.usersService.delete(id);
+    return await this.usersService.delete(id);
   }
 }

@@ -3,6 +3,7 @@ import { Injectable, Logger, NotFoundException } from '@nestjs/common';
 import { Department, DepartmentDocument } from './schemas/department.schema';
 import { DepartmentDTO } from '../departments/dto/department.dto';
 import { InjectModel } from '@nestjs/mongoose';
+import { ArticlesService } from 'src/articles/articles.service';
 
 @Injectable()
 export class DepartmentsService {
@@ -11,6 +12,7 @@ export class DepartmentsService {
   constructor(
     @InjectModel(Department.name)
     private departmentModel: Model<DepartmentDocument>,
+    private articleService: ArticlesService,
   ) {}
 
   async saveDepartment(department: DepartmentDTO): Promise<Department> {
@@ -28,13 +30,16 @@ export class DepartmentsService {
   }
 
   async departmentUpdate(updateData: DepartmentDTO) {
-    const article = await this.departmentModel
+    const oldDept = await this.departmentFindOne(updateData._id);
+    const department = await this.departmentModel
       .findByIdAndUpdate(updateData._id, updateData)
       .setOptions({ overwrite: true, new: true });
-    if (!article) {
+    if (!department) {
       throw new NotFoundException();
+    } else {
+      this.articleService.departmentUpdate(oldDept.title, department.title);
     }
-    return article;
+    return department;
   }
 
   async departmentFindAll(): Promise<Department[]> {

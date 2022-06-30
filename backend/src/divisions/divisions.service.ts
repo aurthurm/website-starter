@@ -5,6 +5,7 @@ import { Tag, TagDocument } from './schemas/tag.schema';
 import { Category, CategoryDocument } from './schemas/category.schema';
 import { CategoryDTO } from './dto/category.dto';
 import { TagDTO } from './dto/tag.dto';
+import { ArticlesService } from 'src/articles/articles.service';
 
 @Injectable()
 export class DivisionsService {
@@ -13,6 +14,7 @@ export class DivisionsService {
   constructor(
     @InjectModel(Category.name) private categoryModel: Model<CategoryDocument>,
     @InjectModel(Tag.name) private tagModel: Model<TagDocument>,
+    private articleService: ArticlesService,
   ) {}
 
   // Categories
@@ -31,11 +33,14 @@ export class DivisionsService {
   }
 
   async categoryUpdate(updateData: CategoryDTO): Promise<Category> {
+    const oldCat = await this.categoryFindOne(updateData._id);
     const category = await this.categoryModel
       .findByIdAndUpdate(updateData._id, updateData)
       .setOptions({ overwrite: true, new: true });
     if (!category) {
       throw new NotFoundException();
+    } else {
+      this.articleService.categoryUpdate(oldCat.title, category.title);
     }
     return category;
   }
@@ -79,6 +84,7 @@ export class DivisionsService {
     }
     return tag;
   }
+
   async tagFindAll(): Promise<Tag[]> {
     return this.tagModel.find().exec();
   }

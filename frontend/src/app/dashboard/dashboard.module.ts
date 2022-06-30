@@ -14,6 +14,7 @@ import { AboutModule } from './about/about.module';
 import { ContactModule } from './contact/contact.module';
 import { ServicesModule } from './services/services.module';
 import { SliderModule } from './slider/slider.module';
+import { UsersModule } from './users/users.module';
 
 
 @NgModule({
@@ -25,6 +26,7 @@ import { SliderModule } from './slider/slider.module';
   ],
   imports: [
     CommonModule,
+    UsersModule,
     DashboardRoutingModule,
     ArticlesModule,
     DepartmentsModule,
